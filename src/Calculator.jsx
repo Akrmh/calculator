@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const App = () => {
   const [input, setInput] = useState("");
+  const [result, setResult] = useState("")
   const [darkMode, setDarkMode] = useState(false);
 
   const handleClick = (value) => {
@@ -11,17 +12,19 @@ const App = () => {
 
   const clearInput = () => {
     setInput("");
+    setResult("")
   };
 
   const backspaceInput = () => {
     setInput(input.slice(0, -1));
+    setResult("")
   };
 
   const calculateResult = () => {
     try {
-      setInput(evaluate(input).toString());
+      setResult(evaluate(input).toString());
     } catch (error) {
-      setInput("Error");
+      setResult("Error");
     }
   };
 
@@ -65,11 +68,12 @@ const App = () => {
         </div>
 
         <div
-          className={`rounded-lg p-4 mb-4 text-3xl font-semibold ${
+          className={`h-[15vh] max-sm:h-[20vh] md:p-2 rounded-lg p-4 mb-4 text-3xl font-semibold flex flex-col ${
             darkMode ? "bg-gray-700 text-gray-100" : "bg-gray-200 text-gray-900"
           }`}
         >
-          {input || "0"}
+         <p>{input || "0"}</p>
+          <p>{result || ""}</p>
         </div>
 
         <div className="grid grid-cols-4 gap-3">
